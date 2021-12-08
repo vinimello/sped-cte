@@ -595,6 +595,7 @@ class Make
         } else {
             return $this->montaCTeOS();
         }
+
         if ($this->toma3 != '') {
             $this->dom->appChild($this->ide, $this->toma3, 'Falta tag "ide"');
         } else {
@@ -603,7 +604,7 @@ class Make
         $this->dom->appChild($this->infCte, $this->ide, 'Falta tag "infCte"');
         if ($this->compl != '') {
             foreach ($this->obsCont as $obsCont) {
-                $this->dom->appChild($this->compl, $obsCont, 'Falta tag "compl"');
+                $this->dom->appChild($this->compl, $obsCont, 'Falta tag "obsCont"');
             }
             foreach ($this->obsFisco as $obsFisco) {
                 $this->dom->appChild($this->compl, $obsFisco, 'Falta tag "compl"');
@@ -913,7 +914,9 @@ class Make
         $this->dom->appChild($this->infCte, $this->ide, 'Falta tag "infCte"');
         if ($this->compl != '') {
             $this->dom->appChild($this->infCte, $this->compl, 'Falta tag "infCte"');
+            $this->dom->appChild($this->compl, $this->obsCont[0], 'Falta tag "obscont"');
         }
+
         $this->dom->appChild($this->emit, $this->enderEmit, 'Falta tag "emit"');
         $this->dom->appChild($this->infCte, $this->emit, 'Falta tag "infCte"');
         if ($this->toma != '') {
@@ -1024,6 +1027,7 @@ class Make
         ];
 
         $std = $this->equilizeParameters($std, $possible);
+
         $this->tpAmb = $std->tpAmb;
         $this->mod = $std->mod;
         $identificador = '#4 <ide> - ';
@@ -3392,7 +3396,7 @@ class Make
                             $this->conditionalNumberFormatting($std->pRedBCOutraUF),
                             false,
                             "$identificador Percentual Red "
-                            . "BC Outra UF"
+                                . "BC Outra UF"
                         );
                     }
                     $this->dom->addChild(
@@ -4819,7 +4823,7 @@ class Make
 
         $possible = [
             'TAF',
-            'NroRegEstadual'
+            'NroRegEstadual',
         ];
         $std = $this->equilizeParameters($std, $possible);
         $identificador = '#1 <rodoOS> - ';
@@ -4838,6 +4842,7 @@ class Make
             false,
             $identificador . 'Número do Registro Estadual'
         );
+
         return $this->rodo;
     }
 
@@ -5913,7 +5918,7 @@ class Make
             $std->CNPJ,
             true,
             "Informar o CNPJ da pessoa jurídica responsável pelo sistema "
-            . "utilizado na emissão do documento fiscal eletrônico"
+                . "utilizado na emissão do documento fiscal eletrônico"
         );
         $this->dom->addChild(
             $infRespTec,
@@ -5921,7 +5926,7 @@ class Make
             $std->xContato,
             true,
             "Informar o nome da pessoa a ser contatada na empresa desenvolvedora "
-            . "do sistema utilizado na emissão do documento fiscal eletrônico"
+                . "do sistema utilizado na emissão do documento fiscal eletrônico"
         );
         $this->dom->addChild(
             $infRespTec,
@@ -5929,7 +5934,7 @@ class Make
             $std->email,
             true,
             "Informar o e-mail da pessoa a ser contatada na empresa "
-            . "desenvolvedora do sistema."
+                . "desenvolvedora do sistema."
         );
         $this->dom->addChild(
             $infRespTec,
@@ -5937,7 +5942,7 @@ class Make
             $std->fone,
             true,
             "Informar o telefone da pessoa a ser contatada na empresa "
-            . "desenvolvedora do sistema."
+                . "desenvolvedora do sistema."
         );
         if (!empty($std->CSRT) && !empty($std->idCSRT)) {
             $this->csrt = $std->CSRT;
